@@ -62,12 +62,9 @@ const pageId = ({params}:{params:{id:string}}) => {
   return (
     <div>
         {data?(
-        <div className="flex flex-col items-center gap-8">
-
-            <div className="w-full h-96 flex justify-center">
-                <Image src={urlImg} width={400} height={400} alt={""} priority={true}/>
-            </div>
-            <section className=" w-11/12 flex flex-col gap-4">
+        <div className="flex flex-col items-center gap-8 xl:w-11/12 xl:mx-auto xl:flex-row xl:items-start">
+            <Image className="w-full flex justify-center xl:w-[65%]" src={urlImg} width={500} height={500} alt={""} priority={true}/>
+            <section className=" w-11/12 flex flex-col gap-4 xl:w-[35%] xl:gap-8">
                 <div className="text-3xl">{data.title}</div>
                 <div className="font-normal text-xl">${data.price}</div>
                 <div className="text-sm font-bold flex flex-col gap-2">
@@ -84,8 +81,8 @@ const pageId = ({params}:{params:{id:string}}) => {
                         <button onClick={handleClickPlus} className="active:scale-125 w-6 h-6 flex justify-center items-center">+</button>
                     </div>
                 </div>
-                {alertSize?(<div className="text-red-400 font-light text-sm">Please, select a size</div>):null}
-                <button onClick={handleClickAddProductCart} className="bg-indigo-400 text-white p-2 rounded-md active:scale-105 ">Add to Cart</button>
+                {alertSize?(<div className="text-red-400 font-light text-sm xl:text-lg">Please, select a size</div>):null}
+                <button onClick={handleClickAddProductCart} className="bg-indigo-400 text-white p-2 rounded-md active:scale-105 xl:w-7/12 ">Add to Cart</button>
                 <div className="flex flex-col gap-4">
                     <h1>Description</h1>
                     <h2 className="text-gray-700 font-light text-md">{data.description}</h2>

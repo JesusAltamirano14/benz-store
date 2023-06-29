@@ -1,11 +1,11 @@
 import Navbar from '@/components/Navbar'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Quicksand } from 'next/font/google'
 import Footer from '@/components/Footer'
 import ProviderState from '@/redux/ProviderState'
 
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Quicksand({ subsets: ['latin'] ,weight:['300','400','500','600','700'] })
 
 export const metadata = {
   title: 'Benz store',
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <body>
         <ProviderState>
           <Navbar/>

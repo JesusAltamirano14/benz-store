@@ -16,12 +16,14 @@ const Cart = () => {
   return (
     <div>
       {productsCart.length===0?<CartEmpty/>:(
-        <div className='flex flex-col gap-4 xl:flex-row w-11/12 mx-auto'>
-          <h1 className='text-2xl'>Cart</h1>
-          <div className='flex flex-col gap-4 border-y-2 py-4 w-full'>
-          {productsCart?.map((product)=>(<ProductCart key={product._id+product.size} product={product}/>))}
+        <div className='flex flex-col gap-4 w-11/12 mx-auto lg:w-8/12 lg:flex-row lg:gap-10 xl:gap-36 lg:jutify-start lg:items-start'>
+          <div className='flex flex-col gap-4 lg:w-[60%]'>
+            <h1 className='text-2xl'>Cart</h1>
+            <div className='flex flex-col gap-4 border-y-2 py-4'>
+            {productsCart?.map((product)=>(<ProductCart key={product._id+product.size} product={product}/>))}
+            </div>
           </div>
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-3 lg:w-[40%] lg:rounded-md lg:shadow-black/30 lg:p-4 xl:gap-8 lg:shadow-lg'>
             <h1 className='text-xl'>Order Summary</h1>
             <div className='flex flex-col gap-2 font-extralight text-slate-600'>
               <ul className='flex justify-between'>
@@ -41,8 +43,8 @@ const Cart = () => {
                 <li>${total}</li>
               </ul>
             </div>
+            <button className='bg-indigo-400 h-10 rounded-sm text-white active:scale-105'>Check out</button>  
           </div>
-          <button className='bg-indigo-400 h-10 rounded-sm text-white active:scale-105'>Check out</button>  
         </div>
       )}
 

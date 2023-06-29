@@ -32,22 +32,22 @@ const ProductCart = ({product}:ProductCartProps) => {
     }
 
   return (
-    <div className='grid grid-cols-10 gap-2 mx-auto font-extralight'>
+    <div className='grid grid-cols-10 gap-2 font-extralight'>
         <div className='col-span-3'>
             <Image src={urlImage} alt={'image'} width={500} height={500}/>
         </div>
         <div className='col-span-5 flex flex-col gap-2'>
             <h1 className='font-normal'>{title}</h1>
             <h2 className='text-slate-500 '>Talla: {size}</h2>
-            <div className='flex justify-start gap-3 items-center'>
-                <LiaMinusCircleSolid onClick={handleClickMinus} className='w-5 h-5'/>
-                <h3>{quantity}</h3>
-                <LiaPlusCircleSolid onClick={handleClickPlus} className='w-5 h-5'/>
+            <div className='flex justify-start items-center gap-3'>
+                <LiaMinusCircleSolid onClick={handleClickMinus} className='w-5 h-5 active:scale-110'/>
+                <h3 className=''>{quantity}</h3>
+                <LiaPlusCircleSolid onClick={handleClickPlus} className='w-5 h-5 active:scale-110'/>
             </div>
         </div>
-        <div className=''>
+        <div className='col-span-2 flex flex-col items-end'>
             <h1 className='font-light'>${price}</h1>
-            <button onClick={()=>{dispatch(deleteProductCart(product))}} className='text-sm underline underline-offset-4 hover:text-blue-500'>Remove</button>
+            <button onClick={()=>{dispatch(deleteProductCart(product))}} className='text-sm underline underline-offset-4 hover:text-blue-500 cursor-default'>Remove</button>
         </div>
     </div>
   )
