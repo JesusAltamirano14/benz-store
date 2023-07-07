@@ -3,6 +3,7 @@ import './globals.css'
 import { Quicksand } from 'next/font/google'
 import Footer from '@/components/Footer'
 import ProviderState from '@/redux/ProviderState'
+import ProviderAuth from '@/components/ProviderAuth'
 
 
 const inter = Quicksand({ subsets: ['latin'] ,weight:['300','400','500','600','700'] })
@@ -21,11 +22,13 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body>
         <ProviderState>
-          <Navbar/>
-          <div className='pt-14'>
-          {children}
-          </div>
-          <Footer/>
+          <ProviderAuth>
+            <Navbar/>
+            <div className='pt-14'>
+            {children}
+            </div>
+            <Footer/>
+          </ProviderAuth>
         </ProviderState>
       </body>
     </html>

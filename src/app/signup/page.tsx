@@ -48,8 +48,8 @@ const SignUp = () => {
               message:'name must be more than 5 characters'
             },
             maxLength:{
-              value:15,
-              message:'name must be less than 15 characters'
+              value:20,
+              message:'name must be less than 20 characters'
             }
           })}/>
           {errors.name?(<div className='text-sm text-red-400'>{errors.name.message}</div>):null}
@@ -80,7 +80,7 @@ const SignUp = () => {
           })} />
           {errors.password?(<div className='text-sm text-red-400'>{errors.password.message}</div>):null}
         </h2>
-      <input className='h-10 bg-indigo-300 text-white text-md rounded-md xl:mt-8' type='submit' value={'send'}/>
+      <input className='h-10 bg-indigo-300 text-white text-md mt-4 rounded-md xl:mt-8' type='submit' value={'create'}/>
       {errorResponseData?(<div className='text-red-400 text-sm'>{errorResponseData}</div>):null}
       </form>
     </div>

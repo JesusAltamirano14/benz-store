@@ -3,11 +3,13 @@ import stateReducer from "./features/stateSlice";
 import  {productsApi}  from "./services/productsApi";
 import { setupListeners } from '@reduxjs/toolkit/query';
 import cartReducer from "./features/cartSlice";
+import codeMainReducer from './features/codeMainSlice';
 
 export const store = configureStore({
     reducer:{
         stateReducer,
         cartReducer,
+        codeMainReducer,
         [productsApi.reducerPath]:productsApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>

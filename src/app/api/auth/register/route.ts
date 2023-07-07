@@ -12,7 +12,7 @@ export async function POST(request:Request) {
         const {email,name,password} = body
 
         const validateName = (name:string) : boolean => {
-            const regex = /^.{5,15}$/
+            const regex = /^.{5,20}$/
             return regex.test(name);
         }
 
@@ -27,7 +27,7 @@ export async function POST(request:Request) {
         }
 
         if(!validateName(name)){
-            return NextResponse.json({message:`name must be more than 5 characters and less then 15 characters`},{status:409});
+            return NextResponse.json({message:`name must be more than 5 characters and less then 20 characters`},{status:409});
         }
         if(!validateEmail(email)){
             return NextResponse.json({message:`insert an valid email`},{status:409});

@@ -70,7 +70,9 @@ const pageId = ({params}:{params:{id:string}}) => {
                 <div className="text-sm font-bold flex flex-col gap-2">
                     <h1 className="font-normal">Size</h1>
                     <div className="flex gap-5">
-                        {sizesTotal.map((size)=>(<button key={size} value={size} onClick={handleClickSize} disabled={!data.sizes.includes(size)} className={`${data.sizes.includes(size)?'':'text-gray-300'} ${selectedSize===size?'border-b-2 border-black':''}`}>{size}</button>))}
+                        {sizesTotal.map((size)=>
+                        (<button key={size} value={size} onClick={handleClickSize} disabled={!data.sizes.includes(size)}
+                        className={`${data.sizes.includes(size)?'':'text-gray-300'} ${selectedSize===size?'border-b-2 border-black':'border-white border-b-2'}`}>{size}</button>))}
                     </div>
                 </div>
                 <div className="flex flex-col gap-4 font-bold">
