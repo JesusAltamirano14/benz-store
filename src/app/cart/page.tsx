@@ -74,7 +74,7 @@ const Cart = () => {
     if(session){
       fetchData();
     }
-  },[session])
+  },[session,HOST]);
 
   return (
     <div>

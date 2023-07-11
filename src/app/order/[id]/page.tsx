@@ -24,7 +24,7 @@ const OrderId = ({params}:{params:{id:string}}) => {
 
         getOrderFromData();
 
-    },[])
+    },[HOST,_id]);
 
  
 
