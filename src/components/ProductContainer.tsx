@@ -21,7 +21,8 @@ const ProductContainer = () => {
         if(genderFilter==='kid') return 'Kids';
         if(genderFilter==='men') return 'Men';
         if(genderFilter==='women') return 'Women'
-    }       
+    }
+    console.log(data);
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
