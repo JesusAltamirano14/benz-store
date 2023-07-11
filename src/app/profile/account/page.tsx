@@ -17,7 +17,7 @@ const Account = () => {
 
     useEffect(()=>{
         dispatch(changeCodeMainButton('profile'))
-    },[])
+    },[dispatch])
 
     const handleClickDeleteAccount = async() => {
         const responseData = await fetch(`${HOST}/api/user/delete/${session?.user._id}`,{

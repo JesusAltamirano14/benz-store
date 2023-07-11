@@ -44,7 +44,7 @@ const AddressForm = ({_id}:AddressFormProps) => {
             setUserData(response1);
         }
         fetchData();
-    },[session,refreshData])
+    },[session,refreshData,HOST,_id])
 
     const handleClickAddressForm : SubmitHandler<Address> = async (data) => {
         setShowContentAddress(false);

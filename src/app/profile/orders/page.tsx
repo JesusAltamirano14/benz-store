@@ -31,7 +31,7 @@ const Orders = () => {
           fetchData();
         }
 
-    },[session]);
+    },[session,HOST,dispatch]);
 
   return (
     <div className='w-10/12 mx-auto xl:w-full'>

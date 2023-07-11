@@ -45,7 +45,7 @@ const ContactForm = ({_id}:AddressFormProps) => {
             setUserData(response1);
         }
         fetchData();
-    },[session,refreshData])
+    },[session,refreshData,HOST,_id]);
 
     const handleClickContactForm : SubmitHandler<{phone:string}> = async (data) => {
         setShowContentPhone(false);
