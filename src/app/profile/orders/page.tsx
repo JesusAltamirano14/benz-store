@@ -37,7 +37,7 @@ const Orders = () => {
     <div className='w-10/12 mx-auto xl:w-full'>
       {ordersData.length<=0?(
         <div className='flex flex-col gap-4 justify-start items-start '>
-          <div className='text-lg font-medium'>There aren't orders yet</div>
+          <div className='text-lg font-medium'>There are not orders yet</div>
           <Link className='bg-indigo-300 w-full h-10 rounded-md text-white text-sm flex justify-center items-center xl:w-48 active:scale-105' href={'/'}>Continue Shopping ...</Link>
         </div>
       ):(
