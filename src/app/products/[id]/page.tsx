@@ -6,7 +6,7 @@ import { ValidSizes } from "@/types/product";
 import Image from "next/image";
 import { useState } from "react";
 
-const pageId = ({params}:{params:{id:string}}) => {
+const PageId = ({params}:{params:{id:string}}) => {
 
     const {id} = params;
     const{data,error,isLoading,isFetching} = useGetProductsByIdQuery(id);
@@ -96,4 +96,4 @@ const pageId = ({params}:{params:{id:string}}) => {
   )
 }
 
-export default pageId
+export default PageId
