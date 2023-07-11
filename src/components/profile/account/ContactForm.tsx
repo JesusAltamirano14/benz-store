@@ -19,6 +19,7 @@ const ContactForm = ({_id}:AddressFormProps) => {
     const [errorResponseData,setErrorResponseData] = useState<string|undefined>(undefined);
 
     const [refreshData,setRefreshData] = useState<boolean>(false);
+    const HOST = process.env.NEXT_PUBLIC_HOST;
 
     const [userData,setUserData] = useState<User>({
         _id     :'',
@@ -39,7 +40,7 @@ const ContactForm = ({_id}:AddressFormProps) => {
 
     useEffect(()=>{
         const fetchData = async() => {
-            const responseData1= await fetch(`http://localhost:3000/api/user/${_id}`);
+            const responseData1= await fetch(`${HOST}/api/user/${_id}`);
             const response1 = await responseData1.json();
             setUserData(response1);
         }
@@ -49,7 +50,7 @@ const ContactForm = ({_id}:AddressFormProps) => {
     const handleClickContactForm : SubmitHandler<{phone:string}> = async (data) => {
         setShowContentPhone(false);
 
-        const responseData = await fetch(`http://localhost:3000/api/user/phone/${_id}`,{
+        const responseData = await fetch(`${HOST}/api/user/phone/${_id}`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

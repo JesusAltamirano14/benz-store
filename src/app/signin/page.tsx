@@ -8,6 +8,7 @@ import {AiOutlineEye} from 'react-icons/ai'
 import {AiOutlineEyeInvisible} from 'react-icons/ai'
 
 import {signIn} from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
 
 const SignIn = () => {
 
@@ -15,6 +16,8 @@ const SignIn = () => {
   const {register,handleSubmit,formState:{errors},reset} = useForm<User>()
   const [errorResponseData,setErrorResponseData] = useState<string | undefined>(undefined)
   const [showPassword,setShowPassword] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const pathnameRecieved = searchParams.get('p');
 
   const handleSubmitPrimary:SubmitHandler<User> = async (data) => {
     const responseAuth = await signIn('credentials',{
@@ -26,7 +29,8 @@ const SignIn = () => {
       setErrorResponseData(responseAuth.error);
     }else{
       setErrorResponseData(undefined);
-      router.push('/')
+      reset();
+      router.push(`${pathnameRecieved?pathnameRecieved:'/'}`)
     }
   } 
 

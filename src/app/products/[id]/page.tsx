@@ -1,6 +1,6 @@
 "use client"
 import { addProductCart } from "@/redux/features/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { useGetProductsByIdQuery } from "@/redux/services/productsApi";
 import { ValidSizes } from "@/types/product";
 import Image from "next/image";
@@ -49,7 +49,7 @@ const pageId = ({params}:{params:{id:string}}) => {
                     title:data.title,
                     size:selectedSize,
                     quantity,
-                    image:data.images[0],
+                    images:data.images,
                     price:data.price,
                     inStock:data.inStock
                 }))

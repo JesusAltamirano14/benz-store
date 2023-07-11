@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form'
 import {FiPlus} from 'react-icons/fi';
 import { useSession } from 'next-auth/react'
-import { useGetProductsByIdQuery } from '@/redux/services/productsApi'
 
 
 interface AddressFormProps {
@@ -19,6 +18,7 @@ const AddressForm = ({_id}:AddressFormProps) => {
     const [errorResponseData,setErrorResponseData] = useState<string|undefined>(undefined);
 
     const [refreshData,setRefreshData] = useState<boolean>(false);
+    const HOST = process.env.NEXT_PUBLIC_HOST;
 
     const [userData,setUserData] = useState<User>({
         _id     :'',
@@ -39,7 +39,7 @@ const AddressForm = ({_id}:AddressFormProps) => {
 
     useEffect(()=>{
         const fetchData = async() => {
-            const responseData1= await fetch(`http://localhost:3000/api/user/${_id}`);
+            const responseData1= await fetch(`${HOST}/api/user/${_id}`);
             const response1 = await responseData1.json();
             setUserData(response1);
         }
@@ -49,7 +49,7 @@ const AddressForm = ({_id}:AddressFormProps) => {
     const handleClickAddressForm : SubmitHandler<Address> = async (data) => {
         setShowContentAddress(false);
 
-        const responseData = await fetch(`http://localhost:3000/api/user/address/${_id}`,{
+        const responseData = await fetch(`${HOST}/api/user/address/${_id}`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

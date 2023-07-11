@@ -1,20 +1,19 @@
 
-import { initialData } from "@/database/products";
-import { SeedProduct, ValidFilters, ValidGenders } from "@/types/product";
+import {ValidFilters} from "@/types/product";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface StateType {
-    products:SeedProduct[],
     filter:{
         type : ValidFilters
-    }
+    },
+    search:string
 }
 
 const initialState : StateType= {
-    products:initialData.products,
     filter:{
         type:'all'
-    }
+    },
+    search:''
 }
 
 
@@ -24,9 +23,12 @@ const stateSlice = createSlice({
     reducers:{
         changeFilter: (state,action: PayloadAction<ValidFilters>) => {
             state.filter.type = action.payload
+        },
+        changeSearch : (state,action:PayloadAction<string>) => {
+            state.search = action.payload
         }
     }
 })
 
 export default stateSlice.reducer;
-export const {changeFilter } = stateSlice.actions;
+export const {changeFilter, changeSearch} = stateSlice.actions;

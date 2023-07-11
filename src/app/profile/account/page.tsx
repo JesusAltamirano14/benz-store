@@ -13,13 +13,14 @@ const Account = () => {
 
     const { data :session} = useSession()
     const dispatch = useAppDispatch();
+    const HOST = process.env.NEXT_PUBLIC_HOST;
 
     useEffect(()=>{
         dispatch(changeCodeMainButton('profile'))
     },[])
 
     const handleClickDeleteAccount = async() => {
-        const responseData = await fetch(`http://localhost:3000/api/user/delete/${session?.user._id}`,{
+        const responseData = await fetch(`${HOST}/api/user/delete/${session?.user._id}`,{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'
@@ -42,7 +43,7 @@ const Account = () => {
                         <h2 className='text-slate-700 font-semibold'>Full Name</h2>
                         <h2 className='text-slate-500'>{session?.user.name}</h2>
                     </div>
-                    <h1 className='underline underline-offset-2'>Edit</h1>
+                    {/* <h1 className='underline underline-offset-2'>Edit</h1> */}
                 </div>
                 <div className='flex justify-between w-full'>
                     <AddressForm _id={session?.user._id}/>   

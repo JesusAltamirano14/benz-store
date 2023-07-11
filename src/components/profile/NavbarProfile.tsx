@@ -55,18 +55,18 @@ const NavbarProfile = () => {
   return (
     <>
         <div className='mt-10 flex justify-start items-center gap-3 text-xl font-semibold w-10/12 mx-auto md:hidden' onClick={()=>{setShowContentNav(true)}}>
-            <h1 className='p-1 rounded-full bg-gray-200'>{principalButton[0]?.icon}</h1>
+            <h1 className='p-1 rounded-full bg-indigo-400 text-white'>{principalButton[0]?.icon}</h1>
             <h1>{principalButton[0]?.title}</h1>
             <h1><FiChevronDown className='w-6 h-6'/></h1>
         </div>
-        <div className={`pt-24 bg-gray-200/4  0 backdrop-blur-md fixed top-0 left-0 w-screen h-screen text-xl z-30 
-        ${showContentNav?null:'hidden xl:block xl:w-full xl:static xl:h-auto'}`}
+        <div className={`pt-24 bg-gray-200/40 backdrop-blur-md fixed top-0 left-0 w-screen h-screen text-xl z-30 
+        ${showContentNav?null:'hidden xl:block xl:w-full xl:static xl:h-auto xl:bg-white'}`}
         onClick={()=>{setShowContentNav(false)}}>
             <div className='flex flex-col items-start gap-8 w-10/12 mx-auto font-semibold'>
             {arrayButtons.map((p,index) => (
                 <div key={p.title} className='flex justify-start items-center gap-3 cursor-pointer' onClick={()=>{handleClickPrincipal(p.code)}}>
-                    <h1 className={`${p.title===principalButton[0].title?'rounded-full bg-gray-400 text-white':null} p-1`}>{p.icon}</h1>
-                    <h1>{p.title}</h1>
+                    <h1 className={`${p.title===principalButton[0].title?'rounded-full bg-indigo-400 text-white':null} p-1`}>{p.icon}</h1>
+                    <h1 className={`${p.title===principalButton[0].title?'text-indigo-400':null}`}>{p.title}</h1>
                 </div>
             ))}
             </div>

@@ -7,17 +7,17 @@ import {LiaMinusCircleSolid} from 'react-icons/lia';
 import {LiaPlusCircleSolid} from 'react-icons/lia';
 
 interface ProductCartProps {
-    product:productCart
+    product:productCart,
+    disable:boolean
 }
 
-const ProductCart = ({product}:ProductCartProps) => {
+const ProductCart = ({product,disable}:ProductCartProps) => {
     const dispatch = useAppDispatch();
 
 
-    const{_id,title,image,size,quantity,price} = product;
-    const [quantityCart,setQuantityCart] = useState<number>(quantity);
+    const{_id,title,images,size,quantity,price,inStock} = product;
 
-    const urlImage = `/products/${image}`
+    const urlImage = `/products/${images[0]}`
 
     const handleClickMinus:React.MouseEventHandler<HTMLOrSVGElement> = (e) => {
         if(quantity>=2){
@@ -26,7 +26,7 @@ const ProductCart = ({product}:ProductCartProps) => {
     }
 
     const handleClickPlus:React.MouseEventHandler<HTMLOrSVGElement> = (e) => {
-        if(quantity<product.inStock &&quantity<=4){
+        if(quantity< inStock! &&quantity<=4){
             dispatch(addOneQuantity(product))
         }
     }
@@ -39,15 +39,26 @@ const ProductCart = ({product}:ProductCartProps) => {
         <div className='col-span-5 flex flex-col gap-2'>
             <h1 className='font-normal'>{title}</h1>
             <h2 className='text-slate-500 '>Talla: {size}</h2>
-            <div className='flex justify-start items-center gap-3'>
+            <div className='flex justify-start items-center gap-3 text-slate-500'>
+                {disable?
+                (
+                <>
+                <div>Quantity:</div>
+                <div>{quantity}</div>
+                </>
+                ):(
+                <>
                 <LiaMinusCircleSolid onClick={handleClickMinus} className='w-5 h-5 active:scale-110'/>
                 <h3 className=''>{quantity}</h3>
                 <LiaPlusCircleSolid onClick={handleClickPlus} className='w-5 h-5 active:scale-110'/>
+                </>
+                )}
+                
             </div>
         </div>
         <div className='col-span-2 flex flex-col items-end'>
             <h1 className='font-light'>${price}</h1>
-            <button onClick={()=>{dispatch(deleteProductCart(product))}} className='text-sm underline underline-offset-4 hover:text-blue-500 cursor-default'>Remove</button>
+            {disable?null:(<button onClick={()=>{dispatch(deleteProductCart(product))}} className='text-sm underline underline-offset-4 hover:text-blue-500 cursor-default'>Remove</button>)}
         </div>
     </div>
   )

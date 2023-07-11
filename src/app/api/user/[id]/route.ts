@@ -13,7 +13,6 @@ export async function GET(request:Request,{params}:{params:{id:string}}){
         return NextResponse.json(foundedData);
     } catch (error) {
         if(error instanceof Error){
-            console.log(error.message);
             return NextResponse.json({message:error.message});
         }
     }

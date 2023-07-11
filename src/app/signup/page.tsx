@@ -9,6 +9,7 @@ const SignUp = () => {
   const router = useRouter();
   const {register,handleSubmit,formState:{errors},reset} = useForm<User>()
   const [errorResponseData,setErrorResponseData] = useState<string | undefined>(undefined)
+  const HOST = process.env.NEXT_PUBLIC_HOST;
 
   const handleSubmitPrimary:SubmitHandler<User> = async (data) => {
 
@@ -21,7 +22,7 @@ const SignUp = () => {
       body:JSON.stringify(data)
     }
     try {
-      const responseData = await fetch('http://localhost:3000/api/auth/register',options);
+      const responseData = await fetch(`${HOST}/api/auth/register`,options);
       const response = await responseData.json()
       if(response.message){
         setErrorResponseData(response.message);

@@ -21,16 +21,18 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { changeCodeMainButton } from "@/redux/features/codeMainSlice";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
 
     const dispatch = useAppDispatch();
 
     const {data:session} = useSession();
-    console.log(session)
 
     const productsCart = useAppSelector(state=>state.cartReducer.products);
     const router = useRouter();
+    const pathname = usePathname();
+
     const [showContent,setShowContent] = useState<boolean>(false);
     const [showApparel,setShowApparel] = useState<boolean>(false);
     const numberOfProductsCart = productsCart?.reduce((accumulator,p)=>(accumulator + p.quantity),0);
@@ -46,7 +48,7 @@ const Navbar = () => {
     }
 
     const handleClickSignIn:React.MouseEventHandler<HTMLHeadingElement> = () => {
-        router.push('/signin');
+        router.push(`/signin?p=${pathname}`);
         setShowContent(false)
     }
     
@@ -135,3 +137,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+

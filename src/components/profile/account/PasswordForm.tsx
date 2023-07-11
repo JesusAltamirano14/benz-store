@@ -15,6 +15,8 @@ interface AddressFormProps {
 
 const PasswordForm = ({_id}:AddressFormProps) => {
 
+    const HOST = process.env.NEXT_PUBLIC_HOST;
+
     const [showContentPassword,setShowContentPassword] = useState<boolean>(false);
     const [errorResponseData,setErrorResponseData] = useState<string|undefined>(undefined);
 
@@ -26,7 +28,7 @@ const PasswordForm = ({_id}:AddressFormProps) => {
 
     const handleClickContactForm : SubmitHandler<ChangePassword> = async (data) => {
         console.log(data);
-        const responseData = await fetch(`http://localhost:3000/api/user/password/${_id}`,{
+        const responseData = await fetch(`${HOST}/api/user/password/${_id}`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
