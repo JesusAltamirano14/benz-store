@@ -1,3 +1,4 @@
+"use client"
 import { addOneQuantity, deleteProductCart, removeOneQuantity } from '@/redux/features/cartSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { productCart } from '@/types/cart'
