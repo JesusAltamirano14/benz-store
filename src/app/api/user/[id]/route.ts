@@ -1,3 +1,4 @@
+import { dbConnect } from "@/database/mongodb";
 import { userData } from "@/models/userSchema";
 import { NextResponse } from "next/server";
 
@@ -5,6 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(request:Request,{params}:{params:{id:string}}){
 
     try {
+        dbConnect();
         const {id} = params;
         const foundedData = await userData.findById(id);
         if(!foundedData){
