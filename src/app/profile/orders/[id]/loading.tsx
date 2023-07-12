@@ -2,7 +2,7 @@ import React from 'react'
 
 const LoadingOrder1 = () => {
   return (
-    <div>LoadingOrder1...</div>
+    <div>Loading Orders ...</div>
   )
 }
 
