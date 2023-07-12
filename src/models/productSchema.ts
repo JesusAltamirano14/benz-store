@@ -37,4 +37,6 @@ const productSchema = new Schema<SeedProduct>({
     }
 })
 
+productSchema.index({title:'text',tags:'text'});
+
 export const productData = models.Product || model('Product',productSchema)

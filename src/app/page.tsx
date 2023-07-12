@@ -6,7 +6,6 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 const getAllProducts = async() => {
   const responseData = await fetch(`${HOST}/api/products`,{cache:'no-store'});
   const response = await responseData.json();
-  console.log('respuesta de todos los productos:',response);
   return response;
 }
 
@@ -15,7 +14,7 @@ export default async function Home() {
   const productsData:SeedProductDataBase[] = await getAllProducts();
   return (
     <main className=''>
-      <ProductContainer productsData={productsData}/>
+      <ProductContainer productsData={productsData} disableTitle={false}/>
     </main>
   )
 }

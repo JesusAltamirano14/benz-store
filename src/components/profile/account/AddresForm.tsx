@@ -16,6 +16,8 @@ const AddressForm = ({_id}:AddressFormProps) => {
     const {data:session} = useSession();
     const [showContentAddress,setShowContentAddress] = useState<boolean>(false);
     const [errorResponseData,setErrorResponseData] = useState<string|undefined>(undefined);
+    const {register,reset,handleSubmit,formState:{errors} } = useForm<Address>();
+
 
     const [refreshData,setRefreshData] = useState<boolean>(false);
     const HOST = process.env.NEXT_PUBLIC_HOST;
@@ -35,17 +37,6 @@ const AddressForm = ({_id}:AddressFormProps) => {
         phone   :'',
     })
     
-    const {register,reset,handleSubmit,formState:{errors} } = useForm<Address>();
-
-    useEffect(()=>{
-        const fetchData = async() => {
-            const responseData1= await fetch(`${HOST}/api/user/${_id}`);
-            const response1 = await responseData1.json();
-            setUserData(response1);
-        }
-        fetchData();
-    },[session,refreshData,HOST,_id])
-
     const handleClickAddressForm : SubmitHandler<Address> = async (data) => {
         setShowContentAddress(false);
 
@@ -65,6 +56,17 @@ const AddressForm = ({_id}:AddressFormProps) => {
             setRefreshData(prevState=>!prevState);
         }
     }
+
+
+    useEffect(()=>{
+        const fetchData = async() => {
+            const responseData1= await fetch(`${HOST}/api/user/${_id}`);
+            const response1 = await responseData1.json();
+            setUserData(response1);
+        }
+        fetchData();
+    },[session,refreshData,HOST,_id])
+
 
   return (
     <>

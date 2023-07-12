@@ -11,7 +11,7 @@ const CartEmpty = () => {
 
   return (
     <div className=' text-2xl w-11/12 mx-auto flex flex-col gap-20 mb-20'>
-      <div>Cart</div>
+      <div className='w-10/12 mx-auto font-semibold'>Cart</div>
       <div className=' w-10/12 mx-auto flex flex-col gap-4'>
         <h1>Your cart is empty</h1>
         <div className='flex flex-col gap-3 xl:flex-row xl:w-7/12'>

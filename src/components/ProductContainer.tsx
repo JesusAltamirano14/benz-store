@@ -5,10 +5,11 @@ import Product from "./Product";
 import { SeedProductDataBase, ValidFilters } from "@/types/product";
 
 interface ProductContainerProps{
-    productsData : SeedProductDataBase[]
+    productsData : SeedProductDataBase[],
+    disableTitle:boolean
 }
 
-const ProductContainer = ({productsData}:ProductContainerProps) => {
+const ProductContainer = ({productsData,disableTitle}:ProductContainerProps) => {
 
     const genderFilter = useAppSelector(state=>state.stateReducer.filter.type);
 
@@ -27,7 +28,7 @@ const ProductContainer = ({productsData}:ProductContainerProps) => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
-        <div className="flex justify-center text-md font-bold" >{title()}</div>
+        {disableTitle?null:<div className="flex justify-center text-md font-bold" >{title()}</div>}
         <div className="pt-10 grid grid-cols-2 justify-center gap-6 w-[86%] xl:grid-cols-3 xl:w-[95%] xl:gap-20">
             {productsData?filterProducts(productsData).map((product)=>(<Product key={product._id} product={product} disable={product.inStock<=0?true:false}/>)):null}
         </div>

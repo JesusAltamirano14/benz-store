@@ -5,7 +5,6 @@ const HOST = process.env.NEXT_PUBLIC_HOST;
 const getProductData = async(id:string) => {
     const responseData = await fetch(`${HOST}/api/products/${id}`);
     const response = await responseData.json();
-    console.log('producto individual:',response);
     return response;
 }
 

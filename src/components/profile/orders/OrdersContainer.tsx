@@ -2,36 +2,20 @@
 import { changeCodeMainButton } from '@/redux/features/codeMainSlice';
 import { useAppDispatch } from '@/redux/hooks'
 import { OrderData } from '@/types/order';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-const Orders = () => {
+interface OrdersContainerProps{
+    ordersData: OrderData[]
+}
+
+const OrdersContainer = ({ordersData}:OrdersContainerProps) => {
 
     const dispatch = useAppDispatch();
-    const HOST = process.env.NEXT_PUBLIC_HOST;
-
-    const {data:session} = useSession();
-
-    const [ordersData,setOrdersData] = useState<OrderData[]>([]);
-
 
     useEffect(()=>{
         dispatch(changeCodeMainButton('orders'));
-        
-        const fetchData = async () => {
-          const responseData = await fetch(`${HOST}/api/orders/total/${session?.user._id}`);
-          const response = await responseData.json();
-          if(!(response.message)){
-            setOrdersData(response);
-          }
-
-        }
-        if(session){
-          fetchData();
-        }
-
-    },[session,HOST,dispatch]);
+    },[dispatch]);
 
   return (
     <div className='w-10/12 mx-auto xl:w-full'>
@@ -74,4 +58,4 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export default OrdersContainer

@@ -11,6 +11,8 @@ import { useRouter } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { changeCodeMainButton } from '@/redux/features/codeMainSlice';
 
+import { useSession } from 'next-auth/react';
+
 export type CodeType = 'profile' | 'orders' | 'signout'
 
 export interface PrincipalButtonProfile {
@@ -21,7 +23,8 @@ export interface PrincipalButtonProfile {
 
 const NavbarProfile = () => {
 
-    const router = useRouter()
+    const router = useRouter();
+    const {data:session} = useSession();
 
     const dispatch = useAppDispatch();
     const codeMainButton = useAppSelector(state=>state.codeMainReducer.code);
@@ -44,7 +47,7 @@ const NavbarProfile = () => {
                 break;
             case 'orders':
                 dispatch(changeCodeMainButton('orders'));
-                router.push('/profile/orders')
+                router.push(`/profile/orders/${session?.user._id}`);
                 break;
             case 'signout':
                 signOut();

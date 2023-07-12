@@ -35,6 +35,7 @@ const Navbar = () => {
 
     const [showContent,setShowContent] = useState<boolean>(false);
     const [showApparel,setShowApparel] = useState<boolean>(false);
+    const [search,setSearch] = useState<string>('');
     const numberOfProductsCart = productsCart?.reduce((accumulator,p)=>(accumulator + p.quantity),0);
 
     const handleClickButton : React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -54,14 +55,22 @@ const Navbar = () => {
     
     const handleClickProfile:React.MouseEventHandler<HTMLHeadingElement> = () => {
         dispatch(changeCodeMainButton('profile'));
-        router.push('/profile/account');
+        router.push(`/profile/account`);
         setShowContent(false);
     }
 
     const handleClickOrders = () => {
         dispatch(changeCodeMainButton('orders'));
-        router.push('/profile/orders');
+        router.push(`/profile/orders/${session?.user._id}`);
         setShowContent(false);
+    }
+
+    const handleSearchClickOrEnter = () => {
+        if(!(search.length===0)){
+            setShowContent(false);
+            router.push(`/search/${search}`)
+            setSearch('')
+        }
     }
 
   return (
@@ -80,8 +89,8 @@ const Navbar = () => {
                     <VscClose className="w-6 h-6 cursor-pointer text-slate-600" onClick={()=>{setShowContent(false)}} />
                     </div>
                     <div className="bg-gray-100 h-10 flex w-full items-center rounded-sm border border-slate-200 p-2 gap-2">
-                        <HiOutlineSearch onClick={()=>{console.log('search')}} className="w-6 h-6 text-slate-600"/>
-                        <input className="w-full h-full bg-gray-100 focus:outline-none" type="text" placeholder="Search"></input>
+                        <HiOutlineSearch onClick={()=>{handleSearchClickOrEnter()}} className="w-6 h-6 text-slate-600"/>
+                        <input onKeyUp={(e)=>{e.key === 'Enter'?handleSearchClickOrEnter():null}} className="w-full h-full bg-gray-100 focus:outline-none" type="text" placeholder="Search" value={search} onChange={(e)=>{setSearch(e.target.value)}}></input>
                     </div>
                     <div className="flex flex-col items-start">
                         <div onClick={()=>{setShowApparel(prevState=>!prevState)}} className="flex w-full items-center justify-between">
@@ -125,7 +134,11 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
-            <div className="mr-6 flex gap-5">
+            <div className="mr-6 flex gap-5 items-center">
+                <div className="hidden bg-gray-100 h-10 w-64 lg:flex items-center rounded-sm border border-slate-200 p-2 gap-2">
+                    <HiOutlineSearch onClick={()=>{handleSearchClickOrEnter()}} className="w-6 h-6 text-slate-600"/>
+                    <input onKeyUp={(e)=>{e.key === 'Enter'?handleSearchClickOrEnter():null}} className="w-full h-full bg-gray-100 focus:outline-none" type="text" placeholder="Search" value={search} onChange={(e)=>{setSearch(e.target.value)}}></input>
+                </div>
                 <div onClick={()=>{router.push('/cart')}} className="relative cursor-pointer active:scale-110">
                     <IoCartOutline className="w-6 h-6"/>
                     <div className="absolute -right-1 -top-1 bg-indigo-400 text-white rounded-full w-4 h-4 flex justify-center items-center text-xs z-10">{numberOfProductsCart}</div>
