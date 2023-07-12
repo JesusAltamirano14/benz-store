@@ -17,9 +17,9 @@ const ProductIdPage = async ({params}:{params:{id:string}}) => {
 
 
   return (
-    <>
+    <div>
         <PageId data={productData}/>
-    </>
+    </div>
   )
 }
 
