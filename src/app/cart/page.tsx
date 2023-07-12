@@ -80,7 +80,7 @@ const Cart = () => {
     <div>
       {productsCart.length===0?<CartEmpty/>:(
         <div className='flex flex-col gap-4 w-11/12 mx-auto lg:w-8/12 lg:flex-row lg:gap-10 xl:gap-36 lg:jutify-start lg:items-start'>
-          <div className='flex flex-col gap-4 lg:w-[60%] bg-green-500'>
+          <div className='flex flex-col gap-4 lg:w-[60%]'>
             <h1 className='text-2xl'>Cart</h1>
             <div className='flex flex-col gap-4 border-y-2 py-4'>
             {productsCart?.map((product)=>(<ProductCart key={product._id + product.size} product={product} disable={false}/>))}
