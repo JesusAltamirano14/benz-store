@@ -4,7 +4,7 @@ import { SeedProductDataBase } from '@/types/product';
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
 const getAllProducts = async() => {
-  const responseData = await fetch(`${HOST}/api/products`);
+  const responseData = await fetch(`${HOST}/api/products`,{cache:'no-store'});
   const response = await responseData.json();
   return response;
 }
