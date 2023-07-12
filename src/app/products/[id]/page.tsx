@@ -4,7 +4,7 @@ import React from 'react'
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
 const getProductData = async(id:string) => {
-    const responseData = await fetch(`${HOST}/api/products/${id}`);
+    const responseData = await fetch(`${HOST}/api/products/${id}`,{cache:'no-store'});
     const response = await responseData.json();
     return response;
 }
