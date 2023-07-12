@@ -8,10 +8,8 @@ export async function GET(){
     try {
         dbConnect();
         const responseData = await productData.find();
-        if(responseData){
-            return NextResponse.json(responseData)
-        }
-        return NextResponse.json({message:'There are nothing on database'})
+        if(!responseData) return NextResponse.json(`There are not products on database`)
+        return NextResponse.json(responseData);
     } catch (error) {
         if(error instanceof Error){
             return NextResponse.json({message:error.message})

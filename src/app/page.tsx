@@ -1,9 +1,22 @@
 import ProductContainer from '@/components/ProductContainer';
+import { SeedProductDataBase } from '@/types/product';
 
-export default function Home() {
+const HOST = process.env.NEXT_PUBLIC_HOST;
+
+const getAllProducts = async() => {
+  const responseData = await fetch(`${HOST}/api/products`);
+  const response = await responseData.json();
+  return response;
+}
+
+export default async function Home() {
+
+  const productsData:SeedProductDataBase[] = await getAllProducts();
   return (
     <main className=''>
-      <ProductContainer/>
+      <ProductContainer productsData={productsData}/>
     </main>
   )
 }
+
+
