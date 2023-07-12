@@ -10,7 +10,7 @@ interface PageIdProps{
     data:SeedProductDataBase
 }
 
-const PageId = ({data}:PageIdProps) => {
+const PageIdComponent = ({data}:PageIdProps) => {
 
     const dispatch = useAppDispatch();
 
@@ -18,7 +18,7 @@ const PageId = ({data}:PageIdProps) => {
     const [quantity,setQuantity] = useState<number>(1);
     const [alertSize,setAlertSize] = useState<boolean>(false);
 
-    const urlImg = `/products/${data?.images[0]}`
+    const urlImg = `/products/${data.images[0]}`
     const sizesTotal : ValidSizes[] = ['XS','S','M','L','XL','XXL','XXXL'];
 
 
@@ -35,15 +35,12 @@ const PageId = ({data}:PageIdProps) => {
 
     const handleClickPlus:React.MouseEventHandler<HTMLButtonElement> = (e) => {
 
-        if(data){
             if(quantity<data.inStock && quantity<=4){
                 setQuantity(prevState=>prevState+1);
             }
-        }
     }
 
     const handleClickAddProductCart:React.MouseEventHandler<HTMLButtonElement> = (e) => {
-        if(data){
             if(selectedSize){
                 dispatch(addProductCart({
                     _id:data._id,
@@ -57,13 +54,10 @@ const PageId = ({data}:PageIdProps) => {
             }else{
                 setAlertSize(true);
             }       
-        }
     }
 
   return (
-    <div>
-        {data?(
-        <div className="flex flex-col items-center gap-8 xl:w-11/12 xl:mx-auto xl:flex-row xl:items-start">
+        <div className="flex flex-col items-center gap-8 xl:w-11/12 xl:mx-auto xl:flex-row xl:items-start xl:mt-8">
             <Image className="w-full flex justify-center xl:w-[65%]" src={urlImg} width={500} height={500} alt={""} priority={true}/>
             <section className=" w-11/12 flex flex-col gap-4 xl:w-[35%] xl:gap-8">
                 <div className="text-3xl">{data.title}</div>
@@ -92,9 +86,7 @@ const PageId = ({data}:PageIdProps) => {
                 </div>
             </section>
         </div>
-        ):null}
-    </div>
   )
 }
 
-export default PageId
+export default PageIdComponent
