@@ -1,4 +1,4 @@
-import PageId from '@/components/products/ProductId';
+import PageIdComponent from '@/components/products/ProductId';
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
@@ -17,7 +17,7 @@ const ProductIdPage = async ({params}:{params:{id:string}}) => {
 
   return (
     <div>
-        <PageId data={productData}/>
+        <PageIdComponent data={productData}/>    
     </div>
   )
 }

@@ -1,10 +1,12 @@
 "use client"
-import { addProductCart } from "@/redux/features/cartSlice";
+import { activeAnimateCart, addProductCart } from "@/redux/features/cartSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { SeedProductDataBase, ValidSizes } from "@/types/product";
 
 import Image from "next/image";
 import { useState } from "react";
+
+import {motion} from "framer-motion"
 
 interface PageIdProps{
     data:SeedProductDataBase
@@ -51,6 +53,7 @@ const PageIdComponent = ({data}:PageIdProps) => {
                     price:data.price,
                     inStock:data.inStock
                 }))
+                dispatch(activeAnimateCart())
             }else{
                 setAlertSize(true);
             }       
@@ -79,7 +82,13 @@ const PageIdComponent = ({data}:PageIdProps) => {
                     </div>
                 </div>
                 {alertSize?(<div className="text-red-400 font-light text-sm xl:text-lg">Please, select a size</div>):null}
-                <button onClick={handleClickAddProductCart} className="bg-indigo-400 text-white p-2 rounded-md active:scale-105 xl:w-7/12 ">Add to Cart</button>
+                <div className="bg-black xl:w-7/12 rounded-md">
+                    <motion.button whileHover={{x:-5,y:-5}} transition={{duration:0.2}} whileTap={{scale:0.9}} onClick={handleClickAddProductCart}
+                    className="bg-indigo-400 p-2 rounded-md  active:scale-105 w-full border-[2px] border-black font-medium"
+                    >
+                        Add to Cart
+                    </motion.button>
+                </div>
                 <div className="flex flex-col gap-4">
                     <h1>Description</h1>
                     <h2 className="text-gray-700 font-light text-md">{data.description}</h2>

@@ -8,7 +8,8 @@ import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { User } from '@/types/user';
-import { emptyCart } from '@/redux/features/cartSlice';
+import { disableAnimateCart, emptyCart } from '@/redux/features/cartSlice';
+import {motion} from 'framer-motion';
 
 const Cart = () => {
   const productsCart = useAppSelector(state=>state.cartReducer.products);
@@ -23,7 +24,6 @@ const Cart = () => {
   const router = useRouter();
   const pathname = usePathname();
   const HOST = process.env.NEXT_PUBLIC_HOST;
-
 
   const {data :session} = useSession();
 
@@ -66,6 +66,7 @@ const Cart = () => {
   }
 
   useEffect(()=>{
+    dispatch(disableAnimateCart());
     const fetchData = async() => {
         const responseData1= await fetch(`${HOST}/api/user/${session?.user._id}`);
         const response1 = await responseData1.json();
@@ -126,7 +127,7 @@ const Cart = () => {
                 <li>${total}</li>
               </ul>
             </div>
-            <button className='bg-indigo-400 h-10 rounded-sm text-white active:scale-105' onClick={handleClickCheckOut}>Check out</button>
+            <motion.button whileHover={{scale:1.02, transition:{repeat:Infinity,repeatType:"reverse",duration:0.3}}} whileTap={{scale:0.95}} className='bg-indigo-400 h-10 rounded-sm text-white active:scale-105' onClick={handleClickCheckOut}>Check out</motion.button>
             {errorData?(<div className='text-red-400 text-sm'>{errorData}</div>):null}  
           </div>
         </div>

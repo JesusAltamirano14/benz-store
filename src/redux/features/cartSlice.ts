@@ -2,11 +2,13 @@ import { productCart } from "@/types/cart";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface productsCartState{
-    products:productCart[]
+    products:productCart[],
+    animateCart:boolean
 }
 
 const initialState:productsCartState = {
-    products:[]
+    products:[],
+    animateCart:false,
 }
 
 
@@ -63,9 +65,15 @@ const cartSlice = createSlice({
         },
         emptyCart:(state) => {
             state.products = [];
+        },
+        activeAnimateCart: (state) => {
+            state.animateCart=true;
+        },
+        disableAnimateCart: (state)=> {
+            state.animateCart=false;
         }
     }
 })
 
 export default cartSlice.reducer;
-export const {addProductCart,deleteProductCart,addOneQuantity,removeOneQuantity, emptyCart} = cartSlice.actions;
+export const {addProductCart,deleteProductCart,addOneQuantity,removeOneQuantity, emptyCart, activeAnimateCart,disableAnimateCart} = cartSlice.actions;

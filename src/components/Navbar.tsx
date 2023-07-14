@@ -22,6 +22,8 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { changeCodeMainButton } from "@/redux/features/codeMainSlice";
 import { usePathname } from "next/navigation";
+import { disableAnimateCart } from "@/redux/features/cartSlice";
+import {Variants, motion} from 'framer-motion'
 
 const Navbar = () => {
 
@@ -29,6 +31,7 @@ const Navbar = () => {
 
     const {data:session} = useSession();
 
+    const animateCart = useAppSelector(state=>state.cartReducer.animateCart);
     const productsCart = useAppSelector(state=>state.cartReducer.products);
     const router = useRouter();
     const pathname = usePathname();
@@ -73,6 +76,21 @@ const Navbar = () => {
         }
     }
 
+    const handleClickCart = () => {
+        router.push('/cart');
+    }
+
+    const variantsCart : Variants = {
+        animate:{
+            y:-10,
+            transition:{
+                duration:0.3,
+                repeat:Infinity,
+                repeatType:"reverse"
+            }
+        },
+    }
+
   return (
         <div className="h-14 w-screen fixed bg-white pl-6 flex justify-between items-center z-30">
             <Link href={'/'} className="w-20 xl:w-28">
@@ -93,20 +111,31 @@ const Navbar = () => {
                         <input onKeyUp={(e)=>{e.key === 'Enter'?handleSearchClickOrEnter():null}} className="w-full h-full bg-gray-100 focus:outline-none" type="text" placeholder="Search" value={search} onChange={(e)=>{setSearch(e.target.value)}}></input>
                     </div>
                     <div className="flex flex-col items-start">
-                        <div onClick={()=>{setShowApparel(prevState=>!prevState)}} className="flex w-full items-center justify-between">
+                        <motion.div animate={`${showApparel?'open':'closed'}`} onClick={()=>{setShowApparel(prevState=>!prevState)}} className="flex w-full items-center justify-between cursor-pointer">
                             <div className="flex items-center gap-3">
                                 <GiClothes className='w-5 h-5 text-slate-600'/>
                                 <span>Apparel</span>
                             </div>
-                            <MdNavigateNext className="w-5 h-5 text-slate-600"/>
-                        </div>
+                            <motion.div variants={{
+                                open:{
+                                    rotate:90
+                                },
+                                closed:{
+                                    rotate:0
+                                }
+                            }}
+                            transition={{duration:0.4}}
+                            >
+                                <MdNavigateNext className="w-5 h-5 text-slate-600 xl:w-6 xl:h-6"/>
+                            </motion.div>
+                        </motion.div>
                         <div className={`w-full flex justify-end transition-all duration-300 ${showApparel?'h-48':'h-0'}`}>
-                            <div className={`overflow-hidden flex w-11/12 flex-col items-start justify-start gap-4 my-4`}>
-                                <button onClick={handleClickButton} value={'all'} >All             </button>
-                                <button onClick={handleClickButton} value={'men'} >Men             </button>
-                                <button onClick={handleClickButton} value={'women'}>Women          </button>
-                                <button onClick={handleClickButton} value={'kid'} >Kids           </button>
-                                <button onClick={handleClickButton} value={'unisex'}>Unisex        </button>
+                            <div className={`overflow-hidden flex w-11/12 flex-col items-start justify-start gap-2 my-4`}>
+                                <motion.button whileHover={{x:8}} onClick={handleClickButton} className="w-24 h-8 pl-4 text-start" value={'all'} >All             </motion.button>
+                                <motion.button whileHover={{x:8}} onClick={handleClickButton} className="w-24 h-8 pl-4 text-start" value={'men'} >Men             </motion.button>
+                                <motion.button whileHover={{x:8}} onClick={handleClickButton} className="w-24 h-8 pl-4 text-start" value={'women'}>Women          </motion.button>
+                                <motion.button whileHover={{x:8}} onClick={handleClickButton} className="w-24 h-8 pl-4 text-start" value={'kid'} >Kids           </motion.button>
+                                <motion.button whileHover={{x:8}} onClick={handleClickButton} className="w-24 h-8 pl-4 text-start" value={'unisex'}>Unisex        </motion.button>
                             </div>
                         </div>
                     </div>
@@ -139,10 +168,10 @@ const Navbar = () => {
                     <HiOutlineSearch onClick={()=>{handleSearchClickOrEnter()}} className="w-6 h-6 text-slate-600"/>
                     <input onKeyUp={(e)=>{e.key === 'Enter'?handleSearchClickOrEnter():null}} className="w-full h-full bg-gray-100 focus:outline-none" type="text" placeholder="Search" value={search} onChange={(e)=>{setSearch(e.target.value)}}></input>
                 </div>
-                <div onClick={()=>{router.push('/cart')}} className="relative cursor-pointer active:scale-110">
-                    <IoCartOutline className="w-6 h-6"/>
-                    <div className="absolute -right-1 -top-1 bg-indigo-400 text-white rounded-full w-4 h-4 flex justify-center items-center text-xs z-10">{numberOfProductsCart}</div>
-                </div>
+                    <motion.div variants={variantsCart} animate={`${animateCart&&'animate'}`} onClick={handleClickCart} className="relative cursor-pointer active:scale-110" >
+                            <IoCartOutline className="w-6 h-6"/>
+                        <div className="absolute -right-1 -top-1 bg-indigo-400 text-white rounded-full w-4 h-4 flex justify-center items-center text-xs z-10">{numberOfProductsCart}</div>
+                    </motion.div>
                 <button className="" onClick={()=>{setShowContent(true)}}>Menu</button>
             </div>
         </div>
