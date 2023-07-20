@@ -27,9 +27,9 @@ export async function POST(request:Request) {
 
         if(!userFounded) return NextResponse.json({message:`user doesn't exist`});
 
-        if(!userFounded.address?.address) return NextResponse.json({message:'must add Address before ordering in your profile settings'});
+        if(!userFounded.address?.address) return NextResponse.json({message:'Debe agregar una direccion de entrega a su perfil'});
 
-        if(!userFounded.phone) return NextResponse.json({message:'must add phone before ordering'});
+        if(!userFounded.phone) return NextResponse.json({message:'Debe agregar un numero de referencia'});
 
         const productsId = itemsOrder.map(p => p._id);
 

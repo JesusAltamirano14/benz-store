@@ -53,7 +53,7 @@ const Cart = () => {
       })
       const response = await responseData.json();
       if(!response.message){
-        router.push('profile/orders');
+        router.push(`profile/orders/${session.user._id}`);
         setErrorData(undefined);
         dispatch(emptyCart());
       }else{

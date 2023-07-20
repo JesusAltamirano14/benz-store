@@ -22,7 +22,6 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import { changeCodeMainButton } from "@/redux/features/codeMainSlice";
 import { usePathname } from "next/navigation";
-import { disableAnimateCart } from "@/redux/features/cartSlice";
 import {Variants, motion} from 'framer-motion'
 
 const Navbar = () => {
@@ -114,7 +113,7 @@ const Navbar = () => {
                         <motion.div animate={`${showApparel?'open':'closed'}`} onClick={()=>{setShowApparel(prevState=>!prevState)}} className="flex w-full items-center justify-between cursor-pointer">
                             <div className="flex items-center gap-3">
                                 <GiClothes className='w-5 h-5 text-slate-600'/>
-                                <span>Apparel</span>
+                                <span className="py-2">Apparel</span>
                             </div>
                             <motion.div variants={{
                                 open:{

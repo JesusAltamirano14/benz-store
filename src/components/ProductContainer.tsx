@@ -24,7 +24,7 @@ const ProductContainer = ({productsData,disableTitle}:ProductContainerProps) => 
     const variantsProductContainer : Variants= {
         visible:{
             transition:{
-                staggerChildren:0.2,
+                staggerChildren:0.17,
                 delayChildren:0,
                 delay:0
             }
@@ -33,7 +33,7 @@ const ProductContainer = ({productsData,disableTitle}:ProductContainerProps) => 
 
     const variantsChildrenProduct : Variants = {
         hidden:{
-            x:-20,
+            x:-100,
             opacity:0,
         },
         visible:{
@@ -42,7 +42,7 @@ const ProductContainer = ({productsData,disableTitle}:ProductContainerProps) => 
             transition:{
                 type:"spring",
                 stiffness:200,
-                damping: 10,
+                damping: 20,
             }
         }
     }
